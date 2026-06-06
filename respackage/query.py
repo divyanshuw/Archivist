@@ -13,7 +13,7 @@ def query(query: str, pro : bool):
     if pro:
         click.secho(f"Getting results for query:", fg='yellow')
         click.secho(f"{query} (fast mode)", fg='green')
-        response = ask_gemini(query, context)
+        response = ask_gemini(query, context, think=True)
     else:
         click.secho(f"Getting results for query:", fg='yellow')
         click.secho(f"{query}", fg='red')

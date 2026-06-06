@@ -5,9 +5,9 @@ client = genai.Client()
 
 def ask_gemini(prompt: str,context: str ,think :bool = False) -> str:
   
-    model = "gemini-2.5-flash"
+    model = "gemini-3-flash-preview"
     if(think == True):
-        model = "gemini-2.5-pro"
+        model = "gemini-3.1-pro-preview"
 
     contents = types.Content(
         role ='user',
@@ -23,16 +23,9 @@ def ask_gemini(prompt: str,context: str ,think :bool = False) -> str:
             top_k=40,
         ),
     )
-    
-    data = response.json()
-    candidates = data.get("candidates", [])
-    if not candidates:
-        return "No response from Gemini."
-
-    parts = candidates[0].get("content", {}).get("parts", [])
 
     client.close()
-    return "".join(part.get("text", "") for part in parts).strip()
+    return response.text
 
 
 if __name__ == "__main__":
